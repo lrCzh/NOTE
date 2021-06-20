@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="note_mood">
+        <item>@string/mood_kaixin</item>
+        <item>@string/mood_kuqi</item>
+        <item>@string/mood_nanguo</item>
+        <item>@string/mood_diluo</item>
+        <item>@string/mood_kuxiao</item>
+        <item>@string/mood_zhenjing</item>
+        <item>@string/mood_haipa</item>
+        <item>@string/mood_deyi</item>
+    </string-array>
+
+    <string-array name="note_weather">
+        <item>@string/weather_qingtian</item>
+        <item>@string/weather_duoyun</item>
+        <item>@string/weather_yingtian</item>
+        <item>@string/weather_dalei</item>
+        <item>@string/weather_xiayu</item>
+        <item>@string/weather_xiaxue</item>
+        <item>@string/weather_yujiaxue</item>
+        <item>@string/weather_taiyangyu</item>
+        <item>@string/weather_wumai</item>
+    </string-array>
+</resources>

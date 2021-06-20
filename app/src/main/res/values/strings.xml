@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">NOTE</string>
+
+    <string name="main_click_to_add">点击添加</string>
+    <string name="sync_uninitialized_webdev_account">未初始化webdev的账号密码</string>
+
+    <!-- menu -->
+    <string name="menu_setting">设置</string>
+    <string name="menu_about">关于</string>
+    <string name="menu_edit">编辑</string>
+    <string name="menu_delete">删除</string>
+    <string name="menu_save">保存</string>
+
+    <!-- weather -->
+    <string name="weather_qingtian">晴天</string>
+    <string name="weather_duoyun">多云</string>
+    <string name="weather_yingtian">阴天</string>
+    <string name="weather_dalei">打雷</string>
+    <string name="weather_xiayu">下雨</string>
+    <string name="weather_xiaxue">下雪</string>
+    <string name="weather_yujiaxue">雨夹雪</string>
+    <string name="weather_taiyangyu">太阳雨</string>
+    <string name="weather_wumai">雾霾</string>
+
+    <!-- mood -->
+    <string name="mood_kaixin">开心</string>
+    <string name="mood_kuqi">哭泣</string>
+    <string name="mood_nanguo">难过</string>
+    <string name="mood_diluo">低落</string>
+    <string name="mood_kuxiao">哭笑</string>
+    <string name="mood_zhenjing">震惊</string>
+    <string name="mood_haipa">害怕</string>
+    <string name="mood_deyi">得意</string>
+
+    <string name="loading">请稍候...</string>
+
+    <!-- EditNoteActivity -->
+    <string name="en_enter_title_hint">请输入标题</string>
+    <string name="en_enter_description_hint">请输入简述</string>
+    <string name="en_select_date_hint">请选择日期</string>
+    <string name="en_select_weather_hint">请选择天气</string>
+    <string name="en_select_mood_hint">请选择心情</string>
+</resources>
