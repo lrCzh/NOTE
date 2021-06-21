@@ -17,9 +17,9 @@ interface NoteDao {
     @Query("select * from note")
     fun getNotes(): PagingSource<Int, Note>
 
-    @Query("select * from note where title like :keyWord or description like :keyWord")
-    suspend fun getNote(keyWord: String): Note
+    @Query("select * from note where title like :keyword or description like :keyword")
+    suspend fun getNotesByKeyword(keyword: String): List<Note>
 
     @Query("select * from note where uid == :id")
-    suspend fun getNote(id: Long): Note
+    suspend fun getNoteById(id: Long): Note?
 }

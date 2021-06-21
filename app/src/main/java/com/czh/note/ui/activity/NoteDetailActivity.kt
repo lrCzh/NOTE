@@ -51,7 +51,9 @@ class NoteDetailActivity : BaseActivity() {
 
     private fun initData() {
         val noteId = intent.getLongExtra(NOTE_ID, NO_ID)
-        if (noteId != NO_ID) {
+        if (noteId == NO_ID) {
+            finish()
+        } else {
             vm.getNote(noteId)
         }
     }

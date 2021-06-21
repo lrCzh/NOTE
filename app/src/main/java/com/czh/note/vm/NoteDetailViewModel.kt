@@ -19,8 +19,12 @@ class NoteDetailViewModel : ViewModel() {
 
     fun getNote(id: Long) {
         viewModelScope.launch(Dispatchers.IO) {
-            val note = noteDao.getNote(id)
-            noteLiveData.postValue(note)
+            val note = noteDao.getNoteById(id)
+            if (note == null) {
+                deleteStatusLiveData.postValue(true)
+            } else {
+                noteLiveData.postValue(note!!)
+            }
         }
     }
 

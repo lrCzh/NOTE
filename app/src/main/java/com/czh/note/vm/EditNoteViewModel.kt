@@ -17,8 +17,10 @@ class EditNoteViewModel : ViewModel() {
 
     fun getNote(id: Long) {
         viewModelScope.launch(Dispatchers.IO) {
-            val note = noteDao.getNote(id)
-            noteLiveData.postValue(note)
+            val note = noteDao.getNoteById(id)
+            note?.let {
+                noteLiveData.postValue(it)
+            }
         }
     }
 
