@@ -1,4 +1,4 @@
-package com.czh.note.ui.widget
+package com.czh.note.ui.dialog
 
 import android.os.Bundle
 import android.text.TextUtils

@@ -24,7 +24,7 @@ class LabelAdapter(private val selectedListener: ((label: String) -> Unit)) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.tv.text = mLabels[position]
-        holder.tv.isSelected = position == mSelected
+        holder.tv.isSelected = position == mSelected // 可以为TextView设置select状态背景颜色，这里赋值就会自动呈现不同的样式
         holder.itemView.setOnClickListener {
             select(position)
         }

@@ -1,7 +1,7 @@
 package com.czh.note.ui.base
 
 import androidx.fragment.app.Fragment
-import com.czh.note.ui.widget.LoadingDialog
+import com.czh.note.ui.dialog.LoadingDialog
 
 class BaseFragment : Fragment() {
 

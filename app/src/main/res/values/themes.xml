@@ -41,4 +41,10 @@
         <!--如果背景需要模糊，模糊到什么程度，当值为1 时，除了dialog以外的部分全黑-->
         <item name="android:backgroundDimAmount">0.5</item>
     </style>
+
+    <!-- ActionSheet进出动画 -->
+    <style name="ActionSheetDialogAnimation" parent="Animation.AppCompat.Dialog">
+        <item name="android:windowEnterAnimation">@anim/sheet_dialog_in</item>
+        <item name="android:windowExitAnimation">@anim/sheet_dialog_out</item>
+    </style>
 </resources>

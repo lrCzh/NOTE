@@ -2,11 +2,9 @@ package com.czh.note.ui.base
 
 import android.R
 import android.view.MenuItem
-import android.view.View
-import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import com.czh.note.ui.widget.LoadingDialog
+import com.czh.note.ui.dialog.LoadingDialog
 
 open class BaseActivity : AppCompatActivity() {
 

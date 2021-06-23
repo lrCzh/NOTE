@@ -7,9 +7,13 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
 import com.czh.note.R
+import com.czh.note.config.AppConfig
 import com.czh.note.databinding.ActivityEditNoteBinding
 import com.czh.note.db.Note
 import com.czh.note.ui.base.BaseActivity
+import com.czh.note.ui.dialog.LabelDialog
+import com.czh.note.util.VibratorUtils
+import com.czh.note.util.toast.toast
 import com.czh.note.vm.EditNoteViewModel
 
 class EditNoteActivity : BaseActivity() {
@@ -35,8 +39,25 @@ class EditNoteActivity : BaseActivity() {
         binding = ActivityEditNoteBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setToolbar(binding.toolbar)
+        initView()
         initVm()
         initData()
+    }
+
+    private fun initView(){
+        binding.tvWeather.setOnClickListener {
+            VibratorUtils.shortVibrate(AppConfig.mContext)
+            LabelDialog.newInstance(LabelDialog.TYPE_WEATHER).apply {
+                setDismissCallback { toast(it?:"") }
+            }.show(supportFragmentManager,"")
+        }
+
+        binding.tvMood.setOnClickListener {
+            VibratorUtils.shortVibrate(AppConfig.mContext)
+            LabelDialog.newInstance(LabelDialog.TYPE_MOOD).apply {
+                setDismissCallback { toast(it?:"") }
+            }.show(supportFragmentManager,"")
+        }
     }
 
     private fun initVm() {
