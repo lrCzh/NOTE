@@ -66,16 +66,47 @@
                 android:background="@color/color_fff6f6f6" />
 
             <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/shape_radius_24_ffc400"
+                android:gravity="center"
+                android:minWidth="140dp"
+                android:paddingVertical="8dp"
+                android:text="@string/en_select_date_hint"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+            <TextView
                 android:id="@+id/tv_weather"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="weather" />
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/shape_radius_24_ffc400"
+                android:gravity="center"
+                android:minWidth="140dp"
+                android:paddingVertical="8dp"
+                android:text="@string/en_select_weather_hint"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/tv_mood"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="mood" />
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="24dp"
+                android:background="@drawable/shape_radius_24_ffc400"
+                android:gravity="center"
+                android:minWidth="140dp"
+                android:paddingVertical="8dp"
+                android:text="@string/en_select_mood_hint"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

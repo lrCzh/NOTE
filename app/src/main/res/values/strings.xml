@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">NOTE</string>
 
-    <string name="main_click_to_add">点击添加</string>
-    <string name="sync_uninitialized_webdev_account">未初始化webdev的账号密码</string>
+    <!-- 通用 -->
+    <string name="cancel">取消</string>
 
     <!-- menu -->
     <string name="menu_setting">设置</string>
@@ -32,12 +32,14 @@
     <string name="mood_haipa">害怕</string>
     <string name="mood_deyi">得意</string>
 
-    <string name="loading">请稍候...</string>
-
     <!-- EditNoteActivity -->
     <string name="en_enter_title_hint">请输入标题</string>
     <string name="en_enter_description_hint">请输入简述</string>
     <string name="en_select_date_hint">请选择日期</string>
     <string name="en_select_weather_hint">请选择天气</string>
     <string name="en_select_mood_hint">请选择心情</string>
+
+    <string name="loading">请稍候...</string>
+    <string name="main_click_to_add">点击添加</string>
+    <string name="sync_uninitialized_webdev_account">未初始化webdev的账号密码</string>
 </resources>

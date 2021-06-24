@@ -1,18 +1,17 @@
 package com.czh.note.ui.dialog
 
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.DialogFragment
 import com.czh.note.R
 import com.czh.note.databinding.DialogLabelsBinding
 import com.czh.note.ui.adapter.LabelAdapter
 import com.czh.note.ui.widget.NoScrollGridLayoutManager
 import com.czh.note.util.getArray
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class LabelDialog : DialogFragment() {
+class LabelDialog : BottomSheetDialogFragment() {
 
     companion object {
         private const val TYPE = "type"
@@ -31,7 +30,12 @@ class LabelDialog : DialogFragment() {
     private var binding: DialogLabelsBinding? = null
     private lateinit var mAdapter: LabelAdapter
 
-    private var dismissCallback: ((label: String?) -> Unit)? = null
+    private var dismissCallback: ((label: String) -> Unit)? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setStyle(STYLE_NORMAL,R.style.BottomSheetDialogTheme)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,10 +60,7 @@ class LabelDialog : DialogFragment() {
 
     private fun initWindow() {
         dialog?.window?.apply {
-            setBackgroundDrawableResource(R.color.transparent)
-            setWindowAnimations(R.style.ActionSheetDialogAnimation)
-            attributes.gravity = Gravity.BOTTOM
-            attributes.width = ViewGroup.LayoutParams.MATCH_PARENT
+            findViewById<View>(R.id.design_bottom_sheet).setBackgroundResource(android.R.color.transparent)
         }
     }
 
@@ -70,6 +71,10 @@ class LabelDialog : DialogFragment() {
             }
             rvLabel.layoutManager = NoScrollGridLayoutManager(requireContext(), 4)
             rvLabel.adapter = mAdapter
+
+            tvCancel.setOnClickListener {
+                dismiss()
+            }
         }
     }
 
@@ -89,12 +94,12 @@ class LabelDialog : DialogFragment() {
         }
     }
 
-    private fun dismissWithCallback(label: String?) {
+    private fun dismissWithCallback(label: String) {
         dismiss()
         dismissCallback?.invoke(label)
     }
 
-    fun setDismissCallback(callback: (label: String?) -> Unit) {
+    fun setDismissCallback(callback: (label: String) -> Unit) {
         this.dismissCallback = callback
     }
 }

@@ -44,19 +44,23 @@ class EditNoteActivity : BaseActivity() {
         initData()
     }
 
-    private fun initView(){
+    private fun initView() {
         binding.tvWeather.setOnClickListener {
             VibratorUtils.shortVibrate(AppConfig.mContext)
             LabelDialog.newInstance(LabelDialog.TYPE_WEATHER).apply {
-                setDismissCallback { toast(it?:"") }
-            }.show(supportFragmentManager,"")
+                setDismissCallback {
+                    binding.tvWeather.text = it
+                }
+            }.show(supportFragmentManager, "labelDialog")
         }
 
         binding.tvMood.setOnClickListener {
             VibratorUtils.shortVibrate(AppConfig.mContext)
             LabelDialog.newInstance(LabelDialog.TYPE_MOOD).apply {
-                setDismissCallback { toast(it?:"") }
-            }.show(supportFragmentManager,"")
+                setDismissCallback {
+                    binding.tvMood.text = it
+                }
+            }.show(supportFragmentManager, "labelDialog")
         }
     }
 
@@ -79,7 +83,11 @@ class EditNoteActivity : BaseActivity() {
     }
 
     private fun updateUI(note: Note) {
-
+        binding.etTitle.setText(note.title)
+        binding.etDescription.setText(note.description)
+        binding.tvDate.text = note.date
+        binding.tvWeather.text = note.weather
+        binding.tvMood.text = note.mood
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

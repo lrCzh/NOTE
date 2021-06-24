@@ -23,7 +23,7 @@
     </style>
 
     <!--loading弹窗样式-->
-    <style name="loadingDialog" parent="android:Theme.Holo.Light.Dialog">
+    <style name="LoadingDialogTheme" parent="android:Theme.Holo.Light.Dialog">
         <!--是否半透明-->
         <item name="android:windowIsTranslucent">true</item>
         <!--设置dialog的背景-->
@@ -42,9 +42,13 @@
         <item name="android:backgroundDimAmount">0.5</item>
     </style>
 
-    <!-- ActionSheet进出动画 -->
-    <style name="ActionSheetDialogAnimation" parent="Animation.AppCompat.Dialog">
-        <item name="android:windowEnterAnimation">@anim/sheet_dialog_in</item>
-        <item name="android:windowExitAnimation">@anim/sheet_dialog_out</item>
+    <!-- 底部对话框样式 start-->
+    <style name="BottomSheetDialogTheme" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BottomSheetStyle</item>
     </style>
+
+    <style name="BottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+    <!-- 底部对话框样式 end-->
 </resources>

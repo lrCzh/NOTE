@@ -16,7 +16,7 @@ class LoadingDialog(
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(STYLE_NORMAL, R.style.loadingDialog)
+        setStyle(STYLE_NORMAL, R.style.LoadingDialogTheme)
     }
 
     override fun onCreateView(
