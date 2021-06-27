@@ -46,7 +46,6 @@ class NoteDetailActivity : BaseActivity() {
 
     private fun initView() {
         ImmersionBar.with(this)
-            .statusBarColor(R.color.white)
             .statusBarDarkFont(true)
             .init()
         setToolbar(binding.toolbar)

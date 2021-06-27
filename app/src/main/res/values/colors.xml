@@ -80,4 +80,7 @@
     <!-- Line color -->
     <color name="color_fff6f6f6">#fff6f6f6</color>
 
+<!--  fab rippleColor  -->
+    <color name="color_44ffffff">#44ffffff</color>
+
 </resources>

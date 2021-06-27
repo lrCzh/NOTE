@@ -45,9 +45,13 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="24dp"
+        android:backgroundTint="@color/colorAccent"
         android:text="@string/main_click_to_add"
+        android:textColor="@color/white"
         app:icon="@drawable/ic_add_white_24"
+        app:iconTint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:rippleColor="@color/color_44ffffff" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
