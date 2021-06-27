@@ -15,8 +15,12 @@ import com.czh.note.ui.adapter.NoteComparator
 import com.czh.note.ui.base.BaseActivity
 import com.czh.note.databinding.ActivityMainBinding
 import com.czh.note.db.AppDatabase
+import com.czh.note.db.NOTE_TYPE_MARK
 import com.czh.note.db.Note
+import com.czh.note.ui.dialog.AddNoteDialog
+import com.czh.note.util.TimeUtils
 import com.czh.note.vm.MainViewModel
+import com.gyf.immersionbar.ImmersionBar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -24,9 +28,7 @@ import kotlinx.coroutines.launch
 class MainActivity : BaseActivity() {
 
     private lateinit var binding: ActivityMainBinding
-
     private val vm by viewModels<MainViewModel>()
-
     private lateinit var mAdapter: NoteAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +39,10 @@ class MainActivity : BaseActivity() {
     }
 
     private fun initView() {
-
+        ImmersionBar.with(this)
+            .statusBarColor(R.color.color_fff6f6f6)
+            .statusBarDarkFont(true)
+            .init()
         setSupportActionBar(binding.toolbar)
         mAdapter = NoteAdapter(NoteComparator) {
             NoteDetailActivity.actionStart(this, it.uid)
@@ -55,15 +60,7 @@ class MainActivity : BaseActivity() {
         })
 
         binding.efab.setOnClickListener {
-            vm.addNote(
-                Note(
-                    title = "qwer",
-                    date = "2003/03/03",
-                    description = "HSDDFHFDFDSFUASSUFDSABFDUFDUFDFNDUJFHHSDDFHFDFDSFUASSUFDSABFDUFDUFDFNDUJFHDUFHDFUDSFGFYAGYSGFYUSGFUYAHSDDFHFDFDSFUASSUFDSABFDUFDUFDFNDUJFHDUFHDFUDSFGFYAGYSGFYUSGFUYADUFHDFUDSFGFYAGYSGFYUSGFUYA",
-                    weather = "多云",
-                    mood = "开心"
-                )
-            )
+            showAddNoteDialog()
         }
 
         lifecycleScope.launch(Dispatchers.IO) {
@@ -85,11 +82,27 @@ class MainActivity : BaseActivity() {
             R.id.setting -> {
 
             }
-
-            R.id.about -> {
-
-            }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun showAddNoteDialog() {
+        AddNoteDialog(this).apply {
+            setOnShowListener {
+                binding.efab.hide()
+            }
+            setOnDismissListener {
+                binding.efab.show()
+            }
+            setSaveCallback { title, date ->
+                vm.addNote(
+                    Note(
+                        title = title,
+                        date = TimeUtils.string2Millis(date, "yyyy-MM-dd"),
+                        type = NOTE_TYPE_MARK
+                    )
+                )
+            }
+        }.show()
     }
 }

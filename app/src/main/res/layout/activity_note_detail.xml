@@ -1,108 +1,129 @@
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:fitsSystemWindows="true">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="240dp"
-        android:fitsSystemWindows="true"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
-            app:contentScrim="?attr/colorPrimary"
-            app:expandedTitleMarginBottom="30dp"
-            app:expandedTitleMarginStart="16dp"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
-
-            <ImageView
-                android:id="@+id/iv_scrolling_top"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fitsSystemWindows="true"
-                android:scaleType="fitXY"
-                android:src="@drawable/pic_1"
-                app:layout_collapseMode="parallax" />
-
-            <LinearLayout
-                android:id="@+id/ll_weather_mood"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end|bottom"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="30dp"
-                android:background="@drawable/bg_weather_mood"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="2dp"
-                app:layout_collapseMode="parallax">
-
-                <ImageView
-                    android:id="@+id/iv_weather"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    tools:src="@drawable/ic_weather_qingtian" />
-
-                <TextView
-                    android:id="@+id/tv_mood"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="6dp"
-                    android:textColor="@color/colorTextDark"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    tools:text="@string/mood_kaixin" />
-            </LinearLayout>
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin"
-                app:popupTheme="@style/AppTheme.PopupOverlay"
-                tools:title="2003/03/03" />
-
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
-    </com.google.android.material.appbar.AppBarLayout>
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="@string/detail" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_tag1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:text="已经"
+                android:textColor="@color/colorTextGrey"
+                android:textSize="10sp"
+                app:layout_constraintBaseline_toBaselineOf="@id/tv_day"
+                app:layout_constraintEnd_toStartOf="@id/tv_day" />
+
+            <TextView
+                android:id="@+id/tv_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/colorTextDark"
+                android:textSize="56sp"
+                android:textStyle="bold|italic"
+                app:layout_constraintEnd_toStartOf="@id/tv_tag2"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="12" />
+
+            <TextView
+                android:id="@+id/tv_tag2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:text="天"
+                android:textColor="@color/colorTextGrey"
+                android:textSize="10sp"
+                app:layout_constraintBaseline_toBaselineOf="@id/tv_day"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_week"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:textColor="@color/colorTextDark"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/tv_year_month"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="周六" />
+
+            <TextView
+                android:id="@+id/tv_year_month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:textColor="@color/colorTextDark"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBaseline_toBaselineOf="@id/tv_day"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="2021年6月12日" />
 
             <TextView
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="24dp"
                 android:textColor="@color/colorTextDark"
                 android:textSize="24sp"
-                android:textStyle="bold|italic"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/tv_description"
+                app:layout_constraintTop_toBottomOf="@id/tv_day"
                 tools:text="第一次吃瓜" />
 
             <TextView
                 android:id="@+id/tv_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
+                android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="16dp"
+                android:lineSpacingExtra="4dp"
                 android:textColor="@color/colorTextDark2nd"
-                android:textSize="17sp"
+                android:textSize="15sp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/tv_title"
                 tools:text="瓜贼好吃" />
-        </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="24dp"
+                android:drawablePadding="4dp"
+                android:gravity="center_vertical"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:drawableStartCompat="@drawable/ic_location_black_24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_description"
+                tools:text="广东潮州" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.czh.note.R
 import com.czh.note.db.Note
+import com.czh.note.util.TimeConstants
+import com.czh.note.util.TimeUtils
 
 class NoteAdapter(
     diffCallback: DiffUtil.ItemCallback<Note>,
@@ -17,11 +19,8 @@ class NoteAdapter(
 
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
         getItem(position)?.let { note ->
-            val date = note.date.split("/")
-            holder.tvMonth.text = date[1]
-            holder.tvDay.text = date[2]
+            holder.tvDay.text = "${TimeUtils.getTimeSpan(System.currentTimeMillis(), note.date, TimeConstants.DAY)} "
             holder.tvTitle.text = note.title
-            holder.tvDescription.text = note.description
             holder.itemView.setOnClickListener {
                 callback.invoke(note)
             }
@@ -34,9 +33,7 @@ class NoteAdapter(
     }
 
     class NoteViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val tvMonth: TextView = itemView.findViewById(R.id.tv_month)
         val tvDay: TextView = itemView.findViewById(R.id.tv_day)
         val tvTitle: TextView = itemView.findViewById(R.id.tv_title)
-        val tvDescription: TextView = itemView.findViewById(R.id.tv_description)
     }
 }

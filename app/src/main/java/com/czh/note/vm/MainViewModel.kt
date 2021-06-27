@@ -25,8 +25,9 @@ class MainViewModel : ViewModel() {
     fun deleteNote(note: Note) {
         viewModelScope.launch(Dispatchers.IO) {
             val num = noteDao.deleteNote(note)
-            Log.d(TAG, num.toString())
-            VibratorUtils.shortVibrate(AppConfig.mContext)
+            if (num == 1) {
+                VibratorUtils.shortVibrate(AppConfig.mContext)
+            }
         }
     }
 }

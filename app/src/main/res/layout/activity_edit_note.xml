@@ -4,18 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".ui.activity.EditNoteActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary"
-        android:theme="@style/AppTheme.AppBarOverlay"
-        app:layout_collapseMode="pin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/AppTheme.PopupOverlay" />
+        app:title="@string/edit" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -23,10 +21,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
             <EditText
                 android:id="@+id/et_title"
@@ -35,17 +32,20 @@
                 android:background="@null"
                 android:hint="@string/en_enter_title_hint"
                 android:maxLength="15"
-                android:paddingHorizontal="16dp"
+                android:paddingHorizontal="20dp"
                 android:paddingVertical="12dp"
                 android:singleLine="true"
                 android:textColor="@color/colorTextDark"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <View
+                android:id="@+id/line1"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/color_fff6f6f6" />
+                android:background="@color/color_fff6f6f6"
+                app:layout_constraintTop_toBottomOf="@id/et_title" />
 
             <EditText
                 android:id="@+id/et_description"
@@ -56,57 +56,100 @@
                 android:hint="@string/en_enter_description_hint"
                 android:imeOptions="actionDone"
                 android:minHeight="200dp"
-                android:paddingHorizontal="16dp"
+                android:paddingHorizontal="20dp"
                 android:paddingVertical="12dp"
-                android:textColor="@color/colorTextDark2nd" />
+                android:textColor="@color/colorTextDark2nd"
+                android:textSize="15sp"
+                app:layout_constraintTop_toBottomOf="@id/line1" />
 
             <View
+                android:id="@+id/line2"
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:background="@color/color_fff6f6f6"
+                app:layout_constraintTop_toBottomOf="@id/et_description" />
+
+            <LinearLayout
+                android:id="@+id/ll_date"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="?attr/selectableItemBackground"
+                android:orientation="horizontal"
+                android:paddingStart="20dp"
+                android:paddingEnd="12dp"
+                app:layout_constraintTop_toBottomOf="@id/line2">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/en_date"
+                    android:textColor="@color/colorTextDark" />
+
+                <TextView
+                    android:id="@+id/tv_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:drawableEnd="@drawable/ic_keyboard_arrow_right_black_24"
+                    android:gravity="center"
+                    android:hint="@string/en_select_date_hint"
+                    android:textColor="@color/colorTextDark"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/line3"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/color_fff6f6f6" />
+                android:background="@color/color_fff6f6f6"
+                app:layout_constraintTop_toBottomOf="@id/ll_date" />
 
-            <TextView
-                android:id="@+id/tv_date"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/shape_radius_24_ffc400"
-                android:gravity="center"
-                android:minWidth="140dp"
-                android:paddingVertical="8dp"
-                android:text="@string/en_select_date_hint"
-                android:textColor="@color/white"
-                android:textSize="12sp" />
+                app:layout_constraintTop_toBottomOf="@id/line3">
 
-            <TextView
-                android:id="@+id/tv_weather"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/shape_radius_24_ffc400"
-                android:gravity="center"
-                android:minWidth="140dp"
-                android:paddingVertical="8dp"
-                android:text="@string/en_select_weather_hint"
-                android:textColor="@color/white"
-                android:textSize="12sp" />
+                <TextView
+                    android:id="@+id/tv_location_hint"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:paddingStart="20dp"
+                    android:text="@string/en_location"
+                    android:textColor="@color/colorTextDark"
+                    app:layout_constraintEnd_toStartOf="@id/et_location"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/tv_mood"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="24dp"
-                android:background="@drawable/shape_radius_24_ffc400"
-                android:gravity="center"
-                android:minWidth="140dp"
-                android:paddingVertical="8dp"
-                android:text="@string/en_select_mood_hint"
-                android:textColor="@color/white"
-                android:textSize="12sp" />
-        </LinearLayout>
+                <EditText
+                    android:id="@+id/et_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:background="@null"
+                    android:gravity="center_vertical|end"
+                    android:hint="@string/en_enter_location_hint"
+                    android:maxLength="15"
+                    android:paddingEnd="20dp"
+                    android:textColor="@color/colorTextDark"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tv_location_hint"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/line4"
+                    android:layout_width="0px"
+                    android:layout_height="8dp"
+                    android:background="@color/color_fff6f6f6"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/et_location" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

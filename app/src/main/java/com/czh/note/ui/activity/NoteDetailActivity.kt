@@ -3,15 +3,20 @@ package com.czh.note.ui.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.activity.viewModels
 import com.czh.note.R
 import com.czh.note.ui.base.BaseActivity
 import com.czh.note.databinding.ActivityNoteDetailBinding
 import com.czh.note.db.Note
-import com.czh.note.util.getWeatherIcon
+import com.czh.note.util.TimeUtils
 import com.czh.note.vm.NoteDetailViewModel
+import com.gyf.immersionbar.ImmersionBar
+import java.text.DateFormat
+import com.czh.note.util.TimeConstants
 
 class NoteDetailActivity : BaseActivity() {
 
@@ -29,24 +34,22 @@ class NoteDetailActivity : BaseActivity() {
 
     private lateinit var binding: ActivityNoteDetailBinding
     private val vm by viewModels<NoteDetailViewModel>()
+    private lateinit var mNote: Note
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityNoteDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        initVm()
+        initView()
         initData()
     }
 
-    private fun initVm() {
-        vm.noteLiveData.observe(this, {
-            updateUI(it)
-        })
-        vm.deleteStatusLiveData.observe(this, { deleted ->
-            if (deleted) {
-                finish()
-            }
-        })
+    private fun initView() {
+        ImmersionBar.with(this)
+            .statusBarColor(R.color.white)
+            .statusBarDarkFont(true)
+            .init()
+        setToolbar(binding.toolbar)
     }
 
     private fun initData() {
@@ -54,17 +57,35 @@ class NoteDetailActivity : BaseActivity() {
         if (noteId == NO_ID) {
             finish()
         } else {
-            vm.getNote(noteId)
+            vm.getNote(noteId).observe(this, {
+                it?.also {
+                    mNote = it
+                    updateUI(it)
+                } ?: finish()
+            })
         }
     }
 
     private fun updateUI(note: Note) {
-        binding.toolbar.title = note.date
-        binding.ivWeather.setImageResource(getWeatherIcon(note.weather))
-        binding.tvMood.text = note.mood
+        val span = TimeUtils.getTimeSpan(System.currentTimeMillis(), note.date, TimeConstants.DAY)
+        val week = TimeUtils.getChineseWeek(note.date)
+        val dateStr = DateFormat.getDateInstance(DateFormat.DEFAULT).format(note.date)
+        binding.tvDay.text = "$span "
+        binding.tvWeek.text = week
+        binding.tvYearMonth.text = dateStr
         binding.tvTitle.text = note.title
-        binding.tvDescription.text = note.description
-        setToolbar(binding.toolbar)
+        if (TextUtils.isEmpty(note.description)) {
+            binding.tvDescription.visibility = View.GONE
+        } else {
+            binding.tvDescription.visibility = View.VISIBLE
+            binding.tvDescription.text = note.description
+        }
+        if (TextUtils.isEmpty(note.location)) {
+            binding.tvLocation.visibility = View.GONE
+        } else {
+            binding.tvLocation.visibility = View.VISIBLE
+            binding.tvLocation.text = note.location
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -75,13 +96,11 @@ class NoteDetailActivity : BaseActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.edit -> {
-                vm.noteLiveData.value?.let {
-                    EditNoteActivity.actionStart(this, it.uid)
-                }
+                EditNoteActivity.actionStart(this, mNote.uid)
             }
 
             R.id.delete -> {
-                vm.noteLiveData.value?.let { vm.deleteNote(it) }
+                vm.deleteNote(mNote)
             }
         }
         return super.onOptionsItemSelected(item)

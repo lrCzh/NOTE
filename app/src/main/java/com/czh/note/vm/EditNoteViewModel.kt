@@ -1,5 +1,6 @@
 package com.czh.note.vm
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -12,21 +13,22 @@ class EditNoteViewModel : ViewModel() {
 
     private val noteDao = AppDatabase.getInstance().noteDao()
 
-    val noteLiveData = MutableLiveData<Note>()
     val saveStatusLiveData = MutableLiveData<Boolean>(false)
 
-    fun getNote(id: Long) {
-        viewModelScope.launch(Dispatchers.IO) {
-            val note = noteDao.getNoteById(id)
-            note?.let {
-                noteLiveData.postValue(it)
-            }
-        }
+    fun getNote(id: Long): LiveData<Note> {
+        return noteDao.getNoteById(id)
     }
 
     fun saveNote(note: Note) {
         viewModelScope.launch(Dispatchers.IO) {
             val rawId = noteDao.addNote(note)
+            saveStatusLiveData.postValue(true)
+        }
+    }
+
+    fun updateNote(note: Note) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val num = noteDao.updateNote(note)
             saveStatusLiveData.postValue(true)
         }
     }

@@ -34,7 +34,7 @@ object VibratorUtils {
      */
     fun shortVibrate(context: Context) {
         val vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-        vibrator.vibrate(50)
+        vibrator.vibrate(10)
     }
 
     /**

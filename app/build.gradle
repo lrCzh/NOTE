@@ -18,9 +18,25 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        myConfig {
+            //加载资源
+            Properties properties = new Properties()
+            InputStream inputStream = project.rootProject.file('local.properties').newDataInputStream()
+            properties.load(inputStream)
+
+            storeFile file(properties['key.path'])
+            storePassword properties['key.pass']
+            keyAlias properties['alias.name']
+            keyPassword properties['alias.pass']
+        }
+    }
+
     buildTypes {
         release {
-            minifyEnabled false
+            signingConfig signingConfigs.myConfig
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -60,6 +76,7 @@ dependencies {
 
     // WebDAV
     implementation "com.github.thegrizzlylabs:sardine-android:0.8"
+    implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

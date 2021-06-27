@@ -1,5 +1,6 @@
 package com.czh.note.db
 
+import androidx.lifecycle.LiveData
 import androidx.paging.PagingSource
 import androidx.room.*
 
@@ -21,5 +22,5 @@ interface NoteDao {
     suspend fun getNotesByKeyword(keyword: String): List<Note>
 
     @Query("select * from note where uid == :id")
-    suspend fun getNoteById(id: Long): Note?
+    fun getNoteById(id: Long): LiveData<Note>
 }

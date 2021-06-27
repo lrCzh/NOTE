@@ -9,5 +9,5 @@
     android:background="@drawable/bg_label"
     android:gravity="center"
     android:textColor="@drawable/tc_label"
-    android:textSize="12sp"
+    android:textSize="13sp"
     tools:text="阴天" />

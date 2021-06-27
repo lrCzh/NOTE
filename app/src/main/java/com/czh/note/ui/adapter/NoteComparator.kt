@@ -12,7 +12,7 @@ object NoteComparator : DiffUtil.ItemCallback<Note>() {
         return oldItem.title == newItem.title &&
                 oldItem.description == newItem.description &&
                 oldItem.date == newItem.date &&
-                oldItem.mood == newItem.mood &&
-                oldItem.weather == newItem.weather
+                oldItem.location == newItem.location &&
+                oldItem.type == newItem.type
     }
 }
