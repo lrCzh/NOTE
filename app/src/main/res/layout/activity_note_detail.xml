@@ -17,8 +17,8 @@
             app:contentScrim="@color/transparent"
             app:expandedTitleMarginBottom="30dp"
             app:expandedTitleMarginStart="20dp"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:titleEnabled="false">
+            app:titleEnabled="false"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <ImageView
                 android:id="@+id/iv_scrolling_top"
@@ -31,32 +31,33 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="?actionBarSize"
                 android:layout_gravity="bottom"
-                android:layout_marginBottom="16dp"
+                android:paddingStart="20dp"
                 app:layout_collapseMode="pin">
 
                 <TextView
                     android:id="@+id/tv_week"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
                     android:textColor="@color/colorTextDark"
                     android:textSize="13sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@id/tv_year_month"
+                    app:layout_constraintVertical_chainStyle="packed"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/tv_year_month"
                     tools:text="周六" />
 
                 <TextView
                     android:id="@+id/tv_year_month"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
                     android:textColor="@color/colorTextDark"
                     android:textSize="10sp"
                     android:textStyle="bold"
-                    app:layout_constraintBaseline_toBaselineOf="@id/tv_day"
+                    app:layout_constraintTop_toBottomOf="@id/tv_week"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     tools:text="2021年6月12日" />
 
@@ -78,6 +79,7 @@
                     android:textColor="@color/colorTextDark"
                     android:textSize="36sp"
                     android:textStyle="bold|italic"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/tv_tag2"
                     tools:text="12" />
@@ -97,12 +99,12 @@
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
+                android:layout_height="?actionBarSize"
+                app:titleTextColor="@color/transparent"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark"
-                app:layout_collapseMode="pin"
+                app:layout_collapseMode="parallax"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                app:title="@string/detail"
-                app:titleTextColor="@color/transparent" />
+                app:title="@string/detail" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
