@@ -1,10 +1,10 @@
 package com.czh.note.ui.activity
 
-import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
@@ -14,6 +14,7 @@ import com.czh.note.databinding.ActivityEditNoteBinding
 import com.czh.note.db.NOTE_TYPE_MARK
 import com.czh.note.db.Note
 import com.czh.note.ui.base.BaseActivity
+import com.czh.note.ui.dialog.CalendarDialog
 import com.czh.note.util.TimeUtils
 import com.czh.note.util.VibratorUtils
 import com.czh.note.util.toast.toast
@@ -22,10 +23,12 @@ import com.gyf.immersionbar.ImmersionBar
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.absoluteValue
 
 class EditNoteActivity : BaseActivity() {
 
     companion object {
+        private const val TAG = "EditNoteActivity"
         private const val NOTE_ID = "note_id"
         private const val NO_ID = -1L
 
@@ -63,8 +66,24 @@ class EditNoteActivity : BaseActivity() {
             .init()
         binding.llDate.setOnClickListener {
             VibratorUtils.shortVibrate(AppConfig.mContext)
-            showDatePicker()
+            showCalendarDialog()
         }
+
+        binding.sv.addOnLayoutChangeListener { _, _, _, _, bottom, _, _, _, oldBottom ->
+//            Log.d(TAG, "bottom:$bottom, oldBottom:$oldBottom")
+            if (bottom != 0 && oldBottom != 0 && bottom != oldBottom) {
+                val distance = (bottom - oldBottom).absoluteValue
+                if (bottom > oldBottom) {
+//                    Log.d(TAG, "键盘隐藏")
+                } else {
+//                    Log.d(TAG, "键盘弹起")
+                    if (binding.etLocation.hasFocus()) {
+                        binding.sv.smoothScrollBy(0, distance)
+                    }
+                }
+            }
+        }
+
         updateDate(calendar.timeInMillis)
     }
 
@@ -137,23 +156,24 @@ class EditNoteActivity : BaseActivity() {
     }
 
     private fun updateDate(millis: Long) {
-        calendar.time = Date(millis)
+        calendar.timeInMillis = millis
         binding.tvDate.text = DateFormat.getDateInstance(DateFormat.FULL).format(millis)
     }
 
-    private fun showDatePicker() {
-        val datePickerDialog = DatePickerDialog(
-            this, { _, year, month, dayOfMonth ->
-                calendar[Calendar.YEAR] = year
-                calendar[Calendar.MONTH] = month
-                calendar[Calendar.DAY_OF_MONTH] = dayOfMonth
-                binding.tvDate.text = DateFormat.getDateInstance(DateFormat.FULL)
-                    .format(calendar.time)
-            },
-            calendar.get(Calendar.YEAR),
-            calendar.get(Calendar.MONTH),
-            calendar.get(Calendar.DAY_OF_MONTH)
+    private fun showCalendarDialog() {
+        val array = arrayOf(
+            calendar[Calendar.YEAR],
+            calendar[Calendar.MONTH],
+            calendar[Calendar.DAY_OF_MONTH]
         )
-        datePickerDialog.show()
+        CalendarDialog(array) {
+            it?.let {
+                calendar[Calendar.YEAR] = it[0]
+                calendar[Calendar.MONTH] = it[1]
+                calendar[Calendar.DAY_OF_MONTH] = it[2]
+                binding.tvDate.text =
+                    DateFormat.getDateInstance(DateFormat.FULL).format(calendar.time)
+            }
+        }.show(supportFragmentManager, "")
     }
 }

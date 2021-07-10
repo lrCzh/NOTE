@@ -10,15 +10,13 @@ import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
 import androidx.recyclerview.widget.RecyclerView
 import com.czh.note.R
+import com.czh.note.config.AppConfig
 import com.czh.note.ui.adapter.NoteAdapter
 import com.czh.note.ui.adapter.NoteComparator
 import com.czh.note.ui.base.BaseActivity
 import com.czh.note.databinding.ActivityMainBinding
 import com.czh.note.db.AppDatabase
-import com.czh.note.db.NOTE_TYPE_MARK
-import com.czh.note.db.Note
-import com.czh.note.ui.dialog.AddNoteDialog
-import com.czh.note.util.TimeUtils
+import com.czh.note.util.VibratorUtils
 import com.czh.note.vm.MainViewModel
 import com.gyf.immersionbar.ImmersionBar
 import kotlinx.coroutines.Dispatchers
@@ -44,9 +42,11 @@ class MainActivity : BaseActivity() {
             .statusBarDarkFont(true)
             .init()
         setSupportActionBar(binding.toolbar)
-        mAdapter = NoteAdapter(NoteComparator) {
+        mAdapter = NoteAdapter(NoteComparator, onClick = {
             NoteDetailActivity.actionStart(this, it.uid)
-        }
+        }, onLongClick = {
+            VibratorUtils.shortVibrate(AppConfig.mContext)
+        })
         binding.rv.adapter = mAdapter
         binding.rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -60,7 +60,7 @@ class MainActivity : BaseActivity() {
         })
 
         binding.efab.setOnClickListener {
-            showAddNoteDialog()
+            EditNoteActivity.actionStart(this)
         }
 
         lifecycleScope.launch(Dispatchers.IO) {
@@ -84,25 +84,5 @@ class MainActivity : BaseActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    private fun showAddNoteDialog() {
-        AddNoteDialog(this).apply {
-            setOnShowListener {
-                binding.efab.hide()
-            }
-            setOnDismissListener {
-                binding.efab.show()
-            }
-            setSaveCallback { title, date ->
-                vm.addNote(
-                    Note(
-                        title = title,
-                        date = TimeUtils.string2Millis(date, "yyyy-MM-dd"),
-                        type = NOTE_TYPE_MARK
-                    )
-                )
-            }
-        }.show()
     }
 }

@@ -14,15 +14,26 @@ import com.czh.note.util.TimeUtils
 
 class NoteAdapter(
     diffCallback: DiffUtil.ItemCallback<Note>,
-    private val callback: (note: Note) -> Unit
+    private val onClick: (note: Note) -> Unit,
+    private val onLongClick: (note: Note) -> Unit
 ) : PagingDataAdapter<Note, NoteAdapter.NoteViewHolder>(diffCallback) {
 
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
         getItem(position)?.let { note ->
-            holder.tvDay.text = "${TimeUtils.getTimeSpan(System.currentTimeMillis(), note.date, TimeConstants.DAY)} "
+            holder.tvDay.text = "${
+                TimeUtils.getTimeSpan(
+                    System.currentTimeMillis(),
+                    note.date,
+                    TimeConstants.DAY
+                )
+            } "
             holder.tvTitle.text = note.title
-            holder.itemView.setOnClickListener {
-                callback.invoke(note)
+            holder.itemView.apply {
+                setOnClickListener { onClick.invoke(note) }
+                setOnLongClickListener {
+                    onLongClick.invoke(note)
+                    true
+                }
             }
         }
     }

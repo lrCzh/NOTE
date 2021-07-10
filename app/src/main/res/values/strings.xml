@@ -6,6 +6,7 @@
     <string name="save">保存</string>
     <string name="edit">编辑</string>
     <string name="detail">详情</string>
+    <string name="confirm">确定</string>
 
     <!-- menu -->
     <string name="menu_setting">设置</string>

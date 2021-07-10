@@ -1,8 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/transparent</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="shapeAppearanceLargeComponent">@style/MyShapeAppearanceLargeComponent</item>
+        <!--tips-->
+        <!--shapeAppearanceSmallComponent 在Button, Chip, Text的属性中使用, 默认 4dp 的圆角-->
+        <!--shapeAppearanceMediumComponent 在Card, Dialog, Date Picker中使用, 默认 4dp 的圆角-->
+        <!--shapeAppearanceLargeComponent 在BottomSheet中使用, 默认 0dp 圆角-->
+
     </style>
 
     <!--loading弹窗样式-->
@@ -30,4 +39,10 @@
         <item name="android:windowEnterAnimation">@anim/sheet_dialog_in</item>
         <item name="android:windowExitAnimation">@anim/sheet_dialog_out</item>
     </style>
+
+    <style name="MyShapeAppearanceLargeComponent" parent="ShapeAppearance.MaterialComponents.LargeComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+
 </resources>

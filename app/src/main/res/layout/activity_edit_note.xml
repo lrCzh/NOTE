@@ -16,6 +16,7 @@
         app:title="@string/edit" />
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/sv"
         android:layout_width="match_parent"
         android:layout_height="0px"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -133,6 +134,8 @@
                     android:hint="@string/en_enter_location_hint"
                     android:maxLength="15"
                     android:paddingEnd="20dp"
+                    android:imeOptions="actionDone"
+                    android:singleLine="true"
                     android:textColor="@color/colorTextDark"
                     android:textSize="12sp"
                     android:textStyle="bold"

@@ -17,7 +17,7 @@ import java.util.*
 
 class AddNoteDialog(context: Context) : Dialog(context) {
 
-    private var binding: DialogAddNoteBinding = DialogAddNoteBinding.inflate(layoutInflater)
+    private val binding: DialogAddNoteBinding = DialogAddNoteBinding.inflate(layoutInflater)
     private var saveCallback: ((title: String, date: String) -> Unit)? = null
 
     private val calendar = Calendar.getInstance()
