@@ -7,6 +7,7 @@
     <string name="edit">编辑</string>
     <string name="detail">详情</string>
     <string name="confirm">确定</string>
+    <string name="setting">设置</string>
 
     <!-- menu -->
     <string name="menu_setting">设置</string>
@@ -14,6 +15,35 @@
     <string name="menu_edit">编辑</string>
     <string name="menu_delete">删除</string>
     <string name="menu_save">保存</string>
+
+    <!-- MainActivity -->
+    <string name="main_dialog_hint">温馨提示</string>
+    <string name="main_delete_hint">是否删除该条记录？</string>
+
+    <!-- EditNoteActivity -->
+    <string name="en_enter_title_hint">请输入标题</string>
+    <string name="en_enter_description_hint">请输入简述(选填)</string>
+    <string name="en_date">日期</string>
+    <string name="en_select_date_hint">请选择日期</string>
+    <string name="en_location">地点</string>
+    <string name="en_enter_location_hint">请填写地点(选填)</string>
+
+    <!-- SettingActivity -->
+    <string name="set_security">安全</string>
+    <string name="set_fingerprint">指纹锁</string>
+    <string name="set_backup">备份</string>
+    <string name="set_about">关于</string>
+
+    <string name="loading">请稍候...</string>
+    <string name="main_click_to_add">点击添加</string>
+    <string name="sync_uninitialized_webdev_account">未初始化webdev的账号密码</string>
+
+    <!--  AddNoteDialog  -->
+    <string name="and_add_note">添加纪念日</string>
+    <string name="and_add_event_hint">请输入事件</string>
+    <string name="and_date">日期</string>
+    <string name="and_select_date_hint">请选择日期</string>
+
 
     <!-- weather -->
     <string name="weather_qingtian">晴天</string>
@@ -35,26 +65,4 @@
     <string name="mood_zhenjing">震惊</string>
     <string name="mood_haipa">害怕</string>
     <string name="mood_deyi">得意</string>
-
-    <!-- EditNoteActivity -->
-    <string name="en_enter_title_hint">请输入标题</string>
-    <string name="en_enter_description_hint">请输入简述(选填)</string>
-    <string name="en_date">日期</string>
-    <string name="en_select_date_hint">请选择日期</string>
-    <string name="en_location">地点</string>
-    <string name="en_enter_location_hint">请填写地点(选填)</string>
-
-
-    <string name="loading">请稍候...</string>
-    <string name="main_click_to_add">点击添加</string>
-    <string name="sync_uninitialized_webdev_account">未初始化webdev的账号密码</string>
-
-
-    <!--  AddNoteDialog  -->
-    <string name="and_add_note">添加纪念日</string>
-    <string name="and_add_event_hint">请输入事件</string>
-    <string name="and_date">日期</string>
-    <string name="and_select_date_hint">请选择日期</string>
-
-
 </resources>

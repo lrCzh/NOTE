@@ -7,6 +7,7 @@ import android.text.TextUtils
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.EditText
 import androidx.activity.viewModels
 import com.czh.note.R
 import com.czh.note.config.AppConfig
@@ -15,6 +16,7 @@ import com.czh.note.db.NOTE_TYPE_MARK
 import com.czh.note.db.Note
 import com.czh.note.ui.base.BaseActivity
 import com.czh.note.ui.dialog.CalendarDialog
+import com.czh.note.util.KeyBoardUtil
 import com.czh.note.util.TimeUtils
 import com.czh.note.util.VibratorUtils
 import com.czh.note.util.toast.toast
@@ -64,9 +66,14 @@ class EditNoteActivity : BaseActivity() {
             .statusBarColor(R.color.white)
             .statusBarDarkFont(true)
             .init()
+
         binding.llDate.setOnClickListener {
             VibratorUtils.shortVibrate(AppConfig.mContext)
             showCalendarDialog()
+        }
+
+        binding.etLocation.setOnClickListener {
+            binding.sv.smoothScrollBy(0, 1000)
         }
 
         binding.sv.addOnLayoutChangeListener { _, _, _, _, bottom, _, _, _, oldBottom ->
@@ -104,6 +111,8 @@ class EditNoteActivity : BaseActivity() {
                     updateUI(it)
                 }
             })
+        } else {
+            focusEt(binding.etTitle)
         }
     }
 
@@ -112,6 +121,40 @@ class EditNoteActivity : BaseActivity() {
         binding.etDescription.setText(note.description)
         updateDate(note.date)
         binding.etLocation.setText(note.location)
+        focusEt(binding.etTitle)
+    }
+
+    private fun focusEt(et: EditText) {
+        et.postDelayed({
+            if (!isFinishing) {
+                et.setSelection(et.text.length)
+                et.requestFocus()
+                KeyBoardUtil.openKeyBord(et, this)
+            }
+        }, 100)
+    }
+
+    private fun updateDate(millis: Long) {
+        calendar.timeInMillis = millis
+        binding.tvDate.text = DateFormat.getDateInstance(DateFormat.FULL).format(millis)
+    }
+
+    private fun showCalendarDialog() {
+        KeyBoardUtil.closeKeyBord(binding.etTitle, this)
+        val array = arrayOf(
+            calendar[Calendar.YEAR],
+            calendar[Calendar.MONTH],
+            calendar[Calendar.DAY_OF_MONTH]
+        )
+        CalendarDialog(array) {
+            it?.let {
+                calendar[Calendar.YEAR] = it[0]
+                calendar[Calendar.MONTH] = it[1]
+                calendar[Calendar.DAY_OF_MONTH] = it[2]
+                binding.tvDate.text =
+                    DateFormat.getDateInstance(DateFormat.FULL).format(calendar.time)
+            }
+        }.show(supportFragmentManager, "")
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -153,27 +196,5 @@ class EditNoteActivity : BaseActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    private fun updateDate(millis: Long) {
-        calendar.timeInMillis = millis
-        binding.tvDate.text = DateFormat.getDateInstance(DateFormat.FULL).format(millis)
-    }
-
-    private fun showCalendarDialog() {
-        val array = arrayOf(
-            calendar[Calendar.YEAR],
-            calendar[Calendar.MONTH],
-            calendar[Calendar.DAY_OF_MONTH]
-        )
-        CalendarDialog(array) {
-            it?.let {
-                calendar[Calendar.YEAR] = it[0]
-                calendar[Calendar.MONTH] = it[1]
-                calendar[Calendar.DAY_OF_MONTH] = it[2]
-                binding.tvDate.text =
-                    DateFormat.getDateInstance(DateFormat.FULL).format(calendar.time)
-            }
-        }.show(supportFragmentManager, "")
     }
 }

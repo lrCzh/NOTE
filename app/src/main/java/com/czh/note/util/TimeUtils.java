@@ -22,7 +22,7 @@ import java.util.Map;
  *     desc  : utils about time
  * </pre>
  */
-public final class TimeUtils {
+public final class  TimeUtils {
 
     private static final ThreadLocal<Map<String, SimpleDateFormat>> SDF_THREAD_LOCAL
             = new ThreadLocal<Map<String, SimpleDateFormat>>() {

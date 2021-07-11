@@ -14,6 +14,11 @@
 
     </style>
 
+    <!--CollapsingToolbarLayout折叠时标题文字样式-->
+    <style name="CollapsedTitleTextStyle" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textColor">@color/transparent</item>
+    </style>
+
     <!--loading弹窗样式-->
     <style name="LoadingDialogTheme" parent="android:Theme.Holo.Light.Dialog">
         <!--是否半透明-->

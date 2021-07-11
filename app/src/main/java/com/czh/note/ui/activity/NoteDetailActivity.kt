@@ -8,6 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
+import com.bumptech.glide.Glide
 import com.czh.note.R
 import com.czh.note.ui.base.BaseActivity
 import com.czh.note.databinding.ActivityNoteDetailBinding
@@ -47,7 +48,9 @@ class NoteDetailActivity : BaseActivity() {
     private fun initView() {
         ImmersionBar.with(this)
             .statusBarDarkFont(true)
+            .transparentStatusBar()
             .init()
+        Glide.with(this).load(R.drawable.pic_2).into(binding.ivScrollingTop)
         setToolbar(binding.toolbar)
     }
 
